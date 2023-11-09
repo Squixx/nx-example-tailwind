@@ -1,0 +1,9 @@
+{
+    "name": "tailwind-styles",
+    "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+    "projectType": "library",
+    "prefix": "tailwind-lib-demo",
+    "sourceRoot": "libs/tailwind-styles",
+    "targets": {}
+  }
+  

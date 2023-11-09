@@ -47,53 +47,6 @@
           "libs/using-tailwind/package.json"
         ]
       }
-    },
-    "storybook": {
-      "executor": "@storybook/angular:start-storybook",
-      "options": {
-        "port": 4400,
-        "configDir": "libs/using-tailwind/.storybook",
-        "browserTarget": "using-tailwind:build-storybook",
-        "compodoc": false
-      },
-      "configurations": {
-        "ci": {
-          "quiet": true
-        }
-      }
-    },
-    "build-storybook": {
-      "executor": "@storybook/angular:build-storybook",
-      "outputs": ["{options.outputDir}"],
-      "options": {
-        "outputDir": "dist/storybook/using-tailwind",
-        "configDir": "libs/using-tailwind/.storybook",
-        "browserTarget": "using-tailwind:build-storybook",
-        "compodoc": false
-      },
-      "configurations": {
-        "ci": {
-          "quiet": true
-        }
-      }
-    },
-    "test-storybook": {
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "test-storybook -c libs/using-tailwind/.storybook --url=http://localhost:4400"
-      }
-    },
-    "static-storybook": {
-      "executor": "@nx/web:file-server",
-      "options": {
-        "buildTarget": "using-tailwind:build-storybook",
-        "staticFilePath": "dist/storybook/using-tailwind"
-      },
-      "configurations": {
-        "ci": {
-          "buildTarget": "using-tailwind:build-storybook:ci"
-        }
-      }
     }
   }
 }
