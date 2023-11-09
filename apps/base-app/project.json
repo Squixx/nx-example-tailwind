@@ -8,15 +8,29 @@
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/base-app",
         "index": "apps/base-app/src/index.html",
         "main": "apps/base-app/src/main.ts",
-        "polyfills": ["zone.js"],
+        "polyfills": [
+          "zone.js"
+        ],
         "tsConfig": "apps/base-app/tsconfig.app.json",
-        "assets": ["apps/base-app/src/favicon.ico", "apps/base-app/src/assets"],
-        "styles": ["apps/base-app/src/styles.css"],
+        "assets": [
+          "apps/base-app/src/favicon.ico",
+          "apps/base-app/src/assets"
+        ],
+        "styles": [
+          "apps/base-app/src/styles.css",
+          {
+            "bundleName": "tailwindCss",
+            "inject": true,
+            "input": "libs/tailwind-styles/tailwind.css"
+          }
+        ],
         "scripts": []
       },
       "configurations": {
@@ -66,14 +80,21 @@
     },
     "lint": {
       "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"],
+      "outputs": [
+        "{options.outputFile}"
+      ],
       "options": {
-        "lintFilePatterns": ["apps/base-app/**/*.ts", "apps/base-app/**/*.html"]
+        "lintFilePatterns": [
+          "apps/base-app/**/*.ts",
+          "apps/base-app/**/*.html"
+        ]
       }
     },
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
       "options": {
         "jestConfig": "apps/base-app/jest.config.ts",
         "passWithNoTests": true
