@@ -1,0 +1,99 @@
+{
+  "name": "using-tailwind",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/using-tailwind/src",
+  "prefix": "tailwind-lib-demo",
+  "tags": [],
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:package",
+      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+      "options": {
+        "project": "libs/using-tailwind/ng-package.json",
+        "tailwindConfig": "libs/using-tailwind/tailwind.config.js"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/using-tailwind/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/using-tailwind/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/using-tailwind/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/using-tailwind/**/*.ts",
+          "libs/using-tailwind/**/*.html",
+          "libs/using-tailwind/package.json"
+        ]
+      }
+    },
+    "storybook": {
+      "executor": "@storybook/angular:start-storybook",
+      "options": {
+        "port": 4400,
+        "configDir": "libs/using-tailwind/.storybook",
+        "browserTarget": "using-tailwind:build-storybook",
+        "compodoc": false
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
+    },
+    "build-storybook": {
+      "executor": "@storybook/angular:build-storybook",
+      "outputs": ["{options.outputDir}"],
+      "options": {
+        "outputDir": "dist/storybook/using-tailwind",
+        "configDir": "libs/using-tailwind/.storybook",
+        "browserTarget": "using-tailwind:build-storybook",
+        "compodoc": false
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
+    },
+    "test-storybook": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "test-storybook -c libs/using-tailwind/.storybook --url=http://localhost:4400"
+      }
+    },
+    "static-storybook": {
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "using-tailwind:build-storybook",
+        "staticFilePath": "dist/storybook/using-tailwind"
+      },
+      "configurations": {
+        "ci": {
+          "buildTarget": "using-tailwind:build-storybook:ci"
+        }
+      }
+    }
+  }
+}
